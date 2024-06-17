@@ -1,0 +1,83 @@
+:root {
+    --macchiato-base: #24273a;
+    --macchiato-mantle: #1e2030;
+    --macchiato-crust: #181926;
+
+    --macchiato-subtext0: #a5adcb;
+    --macchiato-subtext1: #b8c0e0;
+
+    --macchiato-text: #cad3f5;
+
+    --macchiato-overlay0: #6e738d;
+
+    --macchiato-surface0: #363a4f;
+}
+
+* {
+    margin: 0px;
+}
+
+html {
+    background-color: var(--macchiato-base);
+}
+
+body {
+    background-color: var(--macchiato-base);
+    color: var(--macchiato-text);
+    padding: 4px;
+}
+
+nav {
+    > ul {
+        padding: 0px;
+        display: flex;
+        justify-content: space-around;
+        background-color: var(--macchiato-mantle);
+    }
+
+    & a {
+        padding: 15px;
+        display: block;
+        color: var(--macchiato-subtext0);
+        text-decoration: none;
+        
+        &:hover {
+            background-color: var(--macchiato-overlay0);
+        }
+    }
+}
+
+.countries-container {
+    justify-content: space-between;
+    column-gap: 8px;
+    row-gap: 8px;
+    padding: 16px;
+    display: none;
+    flex-wrap: wrap;
+
+    &:target {
+        display: flex;
+    }
+}
+
+.country-card {
+    padding: 4px;
+    border-radius: 6px;
+    background-color: var(--macchiato-surface0);
+    height: 80px;
+    width: 160px;
+    display: inline-flex;
+    column-gap: 4px;
+    justify-items: center;
+}
+
+.country-name {
+    text-align: center;
+    align-content: center;
+    flex-grow: 2;
+    font-size: smaller;
+}
+
+.country-flag {
+    font-size: xxx-large;
+}

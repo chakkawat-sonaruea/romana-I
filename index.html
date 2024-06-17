@@ -1,0 +1,66 @@
+<html>
+   <head>
+      <!-- htmx -->
+      <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+      <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/json-enc.js"></script>
+      <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/client-side-templates.js"></script>
+
+      <!-- handlebars template -->
+      <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+
+      <!-- css -->
+      <link rel="stylesheet" href="style.css">
+   </head>
+
+   <body>
+      <summary
+         hx-post="https://countries.trevorblades.com/"
+         hx-trigger="load"
+         hx-target="#display"
+         hx-vals='{
+            "query": "{ continents { name code countries { name emoji } } }"
+         }'
+         hx-swap="innerHTML"
+         hx-ext="json-enc, client-side-templates"
+         handlebars-array-template="country-format"
+      >
+      </summary> 
+
+      <main id="display"></main>
+
+      <template id="country-format">
+         {{#with data}}
+         <nav>
+            <ul>
+            {{#each continents}}
+               <il>
+                  <a href="#continent-{{code}}">
+                     {{ name }}
+                  </a>
+               </il>
+            {{/each}}
+            </ul>
+         </nav>
+         {{/with}}
+
+         {{#with data}}
+         {{#each continents}}
+         <div class="countries-container" id="continent-{{code}}">
+            {{#each countries}}
+            <div class="country-card">
+               <span class="country-flag">{{emoji}}</span>
+               <span class="country-name">{{name}}</span>
+            </div>
+            {{/each}}
+         </div>
+         {{/each}}
+         {{/with}}
+      </template>
+
+      <script>
+         htmx.on("htmx:beforeSwap", function(evt) {
+            console.log(evt.detail.serverResponse)
+         })
+      </script>
+   </body>
+</html>
